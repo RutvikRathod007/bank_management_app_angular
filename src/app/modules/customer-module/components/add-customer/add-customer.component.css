@@ -1,0 +1,13 @@
+.form-container {
+    padding-top: 3rem;
+ height: calc(100vh - 53px);
+ overflow: hidden;
+}
+.invalid{
+ border-color: red;
+}
+.validation-alert
+{
+color:rgb(207, 32, 32);
+position: absolute;
+}

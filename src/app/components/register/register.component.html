@@ -1,0 +1,240 @@
+<div class="form-container-wrapper d-flex justify-content-center align-items-center container-fluid bg-dark  text-white p-5">
+
+
+  <div class="form-container container">
+    <h1 class="text-center pt-3">Register</h1>
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="registerForm"
+      (submit)="onSubmit()"
+    >
+
+    <div class="row mb-4">
+      <div class="form-group">
+        <label class="form-label" for="userName"> User Name</label>
+        <input
+          name="userName"
+          type="text"
+          id="userName"
+          class="form-control"
+          formControlName="userName"
+          [class.is-invalid]="
+            getFormControls['userName'].invalid &&
+            getFormControls['userName'].touched
+          "
+        />
+        <div
+          *ngIf="
+            getFormControls['userName'].invalid &&
+            getFormControls['userName'].touched
+          "
+        >
+          <div
+            class="validation-alert"
+            *ngIf="
+              getFormControls['userName'].errors &&
+              getFormControls['userName'].errors['required']
+            "
+          >
+            Please enter user name
+          </div>
+
+          <div
+            class="validation-alert"
+            *ngIf="
+              getFormControls['userName'].errors &&
+              getFormControls['userName'].errors['pattern']
+            "
+          >
+            user name must be alphabatic
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+
+
+
+      <div class="row mb-4">
+        <div class="form-group">
+          <label class="form-label" for="mobileNumber"> Mobile Number </label>
+          <input
+            name="mobileNumber"
+            type="text"
+            id="mobileNumber"
+            class="form-control"
+            formControlName="mobileNumber"
+            [class.is-invalid]="
+              getFormControls['mobileNumber'].invalid &&
+              getFormControls['mobileNumber'].touched
+            "
+          />
+          <div
+            *ngIf="
+              getFormControls['mobileNumber'].invalid &&
+              getFormControls['mobileNumber'].touched
+            "
+          >
+            <div
+              class="validation-alert"
+              *ngIf="
+                getFormControls['mobileNumber'].errors &&
+                getFormControls['mobileNumber'].errors['required']
+              "
+            >
+              Please enter mobile number
+            </div>
+
+            <div
+              class="validation-alert"
+              *ngIf="
+                getFormControls['mobileNumber'].errors &&
+                getFormControls['mobileNumber'].errors['pattern']
+              "
+            >
+              invalid mobile number
+            </div>
+          </div>
+        </div>
+</div>
+
+
+<!--Email text fieled starts-->
+<div class="row mb-4">
+  <div class="form-group">
+    <label class="form-label" for="email">Email</label>
+    <input
+      name="email"
+      type="email"
+      id="email"
+      class="form-control"
+      formControlName="email"
+      [class.is-invalid]="
+        getFormControls['email'].invalid &&
+        getFormControls['email'].touched
+      "
+    />
+    <div
+      *ngIf="
+        getFormControls['email'].invalid &&
+        getFormControls['email'].touched
+      "
+    >
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['email'].errors &&
+          getFormControls['email'].errors['required']
+        "
+      >
+        Please enter email
+      </div>
+
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['email'].errors &&
+          getFormControls['email'].errors['pattern']
+        "
+      >
+        invalid email
+      </div>
+    </div>
+  </div>
+</div>
+<!--email text box end-->
+
+
+<div class="row mb-4">
+  <div class="form-group">
+    <label class="form-label" for="password"> Password</label>
+    <input
+      name="password"
+      type="text"
+      id="password"
+      class="form-control"
+      formControlName="password"
+      [class.is-invalid]="
+        getFormControls['password'].invalid &&
+        getFormControls['password'].touched
+      "
+    />
+    <div
+      *ngIf="
+        getFormControls['password'].invalid &&
+        getFormControls['password'].touched
+      "
+    >
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['password'].errors &&
+          getFormControls['password'].errors['required']
+        "
+      >
+        password is required
+      </div>
+
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['password'].errors &&
+          getFormControls['password'].errors['minlength']
+        "
+      >
+    password should be of 8 characters minimum
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="row mb-4">
+  <div>
+    <div  class="form-group">
+      <label
+      class="form-label"
+      for="city">
+      Register As
+     </label>
+     <select
+     [class.is-invalid]="getFormControls['role'].invalid && getFormControls['role'].touched"
+     formControlName="role"  class="form-control form-select" name="role">
+      <option value="">Select</option>
+      <option value="customer">Customer</option>
+      <option value="employee">Bank Employee</option>
+
+
+     </select>
+      <div *ngIf="getFormControls['role'].invalid&&getFormControls['role'].touched">
+        <div class="validation-alert"  *ngIf="getFormControls['role'].errors&&getFormControls['role'].errors['required']">
+            Required
+        </div>
+    </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="row mb-4">
+  <div class="form-group">
+    <button
+    [class.disabled]="registerForm.invalid"
+    type="submit"
+    class="btn btn-primary btn-block mb-4 form-control"
+  >
+   Register
+  </button>
+  </div>
+</div>
+
+
+
+
+
+    </form>
+  </div>
+</div>
+

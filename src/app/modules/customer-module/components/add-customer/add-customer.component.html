@@ -1,0 +1,262 @@
+<div class="form-container container-fluid bg-dark text-white px-5">
+    <h1 class="text-center">Add New Customer</h1>
+    <div class="container">
+
+        <form  enctype="multipart/form-data" [formGroup]="accountOpenForm" (submit)="onSubmit()" >
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+
+            <div class="row mb-4">
+                <!-- input box for firstName -->
+                <div class="col">
+                  <div  class="form-group">
+                    <label class="form-label"
+                    for="firstName">
+                    First name
+                   </label>
+                    <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    class="form-control"
+                    [autofocus]="false"
+                    [class.is-invalid]="getFormControls['firstName'].invalid && getFormControls['firstName'].touched"
+                    formControlName="firstName">
+                    <div *ngIf="getFormControls['firstName'].invalid&&getFormControls['firstName'].touched">
+                        <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['required']">
+                            Please enter firstname
+                        </div>
+                        <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['minlength']&&(!getFormControls['firstName'].errors['pattern'])">
+                          first name is to short minimum 3 letters required
+
+                      </div>
+                      <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['maxlength']&&(!getFormControls['firstName'].errors['pattern'])">
+                        first name is to long maximum 20 letters allowed
+                    </div>
+                    <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['pattern']">
+                      only alphabets are allowed
+                  </div>
+                </div>
+                </div>
+              </div>
+            <!-- input box for lastName -->
+              <div class="col">
+                <div  class="form-group">
+                  <label class="form-label"
+                  for="lastName">
+                  Last name
+                 </label>
+                  <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  class="form-control"
+                  [class.is-invalid]="
+                  getFormControls['lastName'].invalid && getFormControls['lastName'].touched"
+
+                  formControlName="lastName">
+                  <div *ngIf="getFormControls['lastName'].invalid&&getFormControls['lastName'].touched">
+                    <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['required']">
+                        Please enter lastname
+                    </div>
+                    <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['minlength']&&(!getFormControls['lastName'].errors['pattern'])">
+                      lastname is to short minimum 3 letters required
+
+                  </div>
+                  <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['maxlength']&&(!getFormControls['lastName'].errors['pattern'])">
+                    lastname is to long maximum 20 letters allowed
+                </div>
+                <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['pattern']">
+                  only alphabets are allowed
+              </div>
+                </div>
+              </div>
+            </div>
+            </div>
+  <!-- 2 column grid layout with text inputs for the date of birth and city -->
+            <div class="row mb-4">
+
+                <div class="col">
+                  <div  class="form-group">
+                    <label
+                    class="form-label"
+                    for="dob">
+                    DOB
+                  </label>
+                    <input
+                    type="date"
+                    name="dob"
+                    id="dob"
+                    [class.is-invalid]="getFormControls['dob'].invalid"
+                    class="form-control"
+                    formControlName="dob"
+                     />
+                     <div
+                     id="validationServerUsernameFeedback"
+                     class="invalid-feedback position-absolute">
+                      Please choose DOB
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div  class="form-group">
+                    <label
+                    class="form-label"
+                    for="city">
+                    City
+                   </label>
+                   <select
+                   [class.is-invalid]="getFormControls['city'].invalid && getFormControls['city'].touched"
+                   formControlName="city"  class="form-control form-select" name="city">
+                    <option value="">Select</option>
+                    <option value="Rajkot">Rajkot</option>
+                    <option value="Jasdan">Jasdan</option>
+                    <option value="Div">Div</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Jamnagar">Jamnagar</option>
+                    <option value="Botad">Botad</option>
+                    <option value="Delhi">Delhi</option>
+                   </select>
+                    <div *ngIf="getFormControls['city'].invalid&&getFormControls['city'].touched">
+                      <div class="validation-alert"  *ngIf="getFormControls['city'].errors&&getFormControls['city'].errors['required']">
+                          Please select city
+                      </div>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+  <!-- 2 column grid layout with text inputs for the email and amount -->
+            <div class="row mb-4">
+
+                  <div  class="form-group col">
+                    <label
+                    class="form-label"
+                    for="amount">
+                    Amount
+                   </label>
+                    <input
+                    type="text"
+                    name="amount"
+                    id="amount"
+                    class="form-control"
+                    formControlName="amount"
+                    [class.is-invalid]="getFormControls['amount'].invalid && getFormControls['amount'].touched"
+
+                    />
+                    <div *ngIf="getFormControls['amount'].invalid&&getFormControls['amount'].touched">
+                      <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['required']">
+                          Please enter amount
+                      </div>
+                      <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['min']&&(!getFormControls['amount'].errors['pattern'])">
+                        minimum amount needed is 100
+
+                    </div>
+
+                  <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['pattern']">
+                    only number allowed in amount and it not start with 0
+                </div>
+
+                  </div>
+                  </div>
+
+                  <div class="col">
+                    <div  class="form-group">
+                      <label
+                      class="form-label"
+                      for="phoneNumber">
+                      Phone Number
+                     </label>
+                      <input
+                      name="phoneNumber"
+                      type="text"
+                      id="phoneNumber"
+                      class="form-control"
+                      formControlName="mobileNumber"
+                      [class.is-invalid]="getFormControls['mobileNumber'].invalid && getFormControls['mobileNumber'].touched"
+
+                      />
+                      <div *ngIf="getFormControls['mobileNumber'].invalid&&getFormControls['mobileNumber'].touched">
+                        <div class="validation-alert"  *ngIf="getFormControls['mobileNumber'].errors&&getFormControls['mobileNumber'].errors['required']">
+                            Please enter mobileNumber
+                        </div>
+
+                    <div class="validation-alert"  *ngIf="getFormControls['mobileNumber'].errors&&getFormControls['mobileNumber'].errors['pattern']">
+                      invalid mobile number
+                  </div>
+                    </div>
+                    </div>
+                  </div>
+
+            </div>
+
+  <!-- 2 column grid layout with text inputs for the email and amount -->
+            <div class="row mb-4">
+
+                <div class="col">
+                  <div class="form-group">
+                    <label
+                    class="form-label"
+                    for="customerImage">
+                    Customer Image
+                   </label>
+                    <input
+                     name="customerImage"
+                     type="file"
+                     accept=".png, .jpg, .jpeg"
+                     id="customerImage"
+                     class="form-control"
+                     formControlName="customerImage"
+                     (change)="onFileInput($event)" />
+
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div  class="form-group">
+                    <label
+                    class="form-label"
+                    for="accountTypr">
+                    Account Type
+                   </label>
+                   <select
+                   [class.is-invalid]="getFormControls['accountType'].invalid && getFormControls['accountType'].touched"
+                   formControlName="accountType"  class="form-control form-select" name="accountType">
+                    <option value="">Select</option>
+                    <option value="saving">Saving</option>
+                    <option value="current">Current</option>
+                   </select>
+                    <div *ngIf="getFormControls['accountType'].invalid&&getFormControls['accountType'].touched">
+                      <div class="validation-alert"  *ngIf="getFormControls['accountType'].errors&&getFormControls['accountType'].errors['required']">
+                          Please select account type
+                      </div>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+        <div class="row mb-4">
+
+
+            <div  class="form-group d-flex justify-content-center">
+               <button
+               [class.disabled]="accountOpenForm.invalid"
+                 type="submit"
+                 class="btn btn-success btn-block mb-4"
+                 >Create Account
+                </button>
+                <button
+                 (click)="closeAddCustomerForm()"
+                  class="btn btn-warning btn-block mb-4 ms-3"
+                  >Cancel
+                 </button>
+            </div>
+
+           </div>
+          </form>
+    </div>
+</div>

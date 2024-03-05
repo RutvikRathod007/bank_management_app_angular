@@ -1,0 +1,130 @@
+
+
+<!-- Modal -->
+<div class="update-modal">
+
+  <div class="modal-content">
+
+      <h1 class="text-center">Edit Account Details</h1>
+
+
+      <form  enctype="multipart/form-data" [formGroup]="updateAccForm" (submit)="onSubmit()" >
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+
+        <div class="row mb-4">
+            <!-- input box for accountNumber -->
+            <div class="col">
+              <div  class="form-group">
+                <label class="form-label"
+                for="accountNumber">
+               Account Number
+               </label>
+                <input
+                readonly
+                type="text"
+                id="accountNumber"
+                name="accountNumber"
+                class="form-control"
+                formControlName="accNum"
+                >
+
+            </div>
+          </div>
+        <!-- input box for accBalance -->
+          <div class="col">
+            <div  class="form-group">
+              <label class="form-label"
+              for="accBalance">
+              Balance
+             </label>
+              <input
+              type="text"
+              id="accBalance"
+              name="accBalance"
+              class="form-control"
+              [class.is-invalid]="
+              getFormControls['accBalance'].invalid && getFormControls['accBalance'].touched"
+
+              formControlName="accBalance">
+              <div *ngIf="getFormControls['accBalance'].invalid&&getFormControls['accBalance'].touched">
+                <div class="validation-alert"  *ngIf="getFormControls['accBalance'].errors&&getFormControls['accBalance'].errors['required']">
+                    Please enter amount
+                </div>
+                <div class="validation-alert"  *ngIf="getFormControls['accBalance'].errors&&getFormControls['accBalance'].errors['min']&&(!getFormControls['accBalance'].errors['pattern'])">
+                  minimum amount is 100
+
+              </div>
+            <div class="validation-alert"  *ngIf="getFormControls['accBalance'].errors&&getFormControls['accBalance'].errors['pattern']">
+              only numers are allowed
+          </div>
+            </div>
+          </div>
+        </div>
+        </div>
+<!-- 2 column grid layout with text inputs for the date of birth and city -->
+        <div class="row mb-4">
+
+          <div class="col">
+            <div  class="form-group">
+              <label
+              class="form-label"
+              for="accountStatusToggle">
+              Account Type
+             </label>
+             <select
+             [class.is-invalid]="getFormControls['accType'].invalid && getFormControls['accType'].touched"
+             formControlName="accType"  class="form-control form-select" name="accountType">
+              <option value="">Select</option>
+              <option value="saving">Saving</option>
+              <option value="current">Current</option>
+             </select>
+              <div *ngIf="getFormControls['accType'].invalid&&getFormControls['accType'].touched">
+                <div class="validation-alert"  *ngIf="getFormControls['accType'].errors&&getFormControls['accType'].errors['required']">
+                    Please select account type
+                </div>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class="row mb-4">
+
+            <div class="col">
+              <div  class="form-group">
+                <label
+                class="form-label"
+                for="accountTypr">
+                Status
+               </label>
+               <div class="form-check form-switch">
+                <input formControlName="isActive" class="form-check-input" type="checkbox" role="switch"  [checked]="isActive">
+
+                </div>
+                </div>
+</div>
+
+        </div>
+      </form>
+      <div class="row mb-4  d-flex justify-content-center gap-3">
+
+
+
+        <button
+        [class.disabled]="updateAccForm.invalid"
+          type="submit"
+          (click)="onSubmit()"
+          class="btn btn-primary btn-block col-2"
+          >Update
+         </button>
+
+
+       <button
+       (click)="onCloseBtnClick()"
+         type="submit"
+         class="btn btn-primary btn-block  col-2"
+         >Cancel
+</button>
+    </div>
+    </div>
+  </div>
+
+

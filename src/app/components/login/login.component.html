@@ -1,0 +1,129 @@
+
+<div class="form-container-wrapper d-flex justify-content-center align-items-center container-fluid bg-dark  text-white p-5">
+
+
+  <div class="form-container container">
+    <div class="loader-body" *ngIf="showLoader">
+      <div class="honeycomb">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+    </div>
+    <h1 class="text-center">Login</h1>
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="loginForm"
+      (submit)="onSubmit()"
+    >
+      <div class="row mb-4">
+        <div class="form-group">
+          <label class="form-label" for="mobileNumber"> Mobile Number </label>
+          <input
+            name="mobileNumber"
+            type="text"
+            id="mobileNumber"
+            class="form-control"
+            formControlName="mobileNumber"
+            [class.is-invalid]="
+              getFormControls['mobileNumber'].invalid &&
+              getFormControls['mobileNumber'].touched
+            "
+          />
+          <div
+            *ngIf="
+              getFormControls['mobileNumber'].invalid &&
+              getFormControls['mobileNumber'].touched
+            "
+          >
+            <div
+              class="validation-alert"
+              *ngIf="
+                getFormControls['mobileNumber'].errors &&
+                getFormControls['mobileNumber'].errors['required']
+              "
+            >
+              Please enter mobile number
+            </div>
+
+            <div
+              class="validation-alert"
+              *ngIf="
+                getFormControls['mobileNumber'].errors &&
+                getFormControls['mobileNumber'].errors['pattern']
+              "
+            >
+              invalid mobile number
+            </div>
+          </div>
+        </div>
+</div>
+
+<div class="row mb-4">
+  <div class="form-group">
+    <label class="form-label" for="password"> Password</label>
+    <input
+      name="password"
+      type="text"
+      id="password"
+      class="form-control"
+      formControlName="password"
+      [class.is-invalid]="
+        getFormControls['password'].invalid &&
+        getFormControls['password'].touched
+      "
+    />
+    <div
+      *ngIf="
+        getFormControls['password'].invalid &&
+        getFormControls['password'].touched
+      "
+    >
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['password'].errors &&
+          getFormControls['password'].errors['required']
+        "
+      >
+        password is required
+      </div>
+
+      <div
+        class="validation-alert"
+        *ngIf="
+          getFormControls['password'].errors &&
+          getFormControls['password'].errors['minlength']
+        "
+      >
+    password should be of 8 characters minimum
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mb-4">
+  <div class="form-group">
+    <button
+    [class.disabled]="loginForm.invalid"
+    type="submit"
+    class="btn btn-primary btn-block mb-4 form-control"
+  >
+   Login
+  </button>
+  </div>
+</div>
+
+
+
+
+
+    </form>
+  </div>
+</div>

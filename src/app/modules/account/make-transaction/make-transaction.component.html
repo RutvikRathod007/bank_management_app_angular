@@ -1,0 +1,150 @@
+<div class="modal-content bg-dark text-white px-5 py-3">
+
+  <h1 class="text-center">Transaction</h1>
+
+
+  <form enctype="multipart/form-data" [formGroup]="depositeForm" (submit)="onSubmit()" >
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+
+    <div class="col-12 mb-4">
+
+          <div  class="form-group">
+            <label class="form-label"
+            for="accountNumber">
+          From Account Number
+           </label>
+            <input
+            readonly
+            type="text"
+            id="accountNumber"
+            name="accountNumber"
+            class="form-control"
+            formControlName="accNumFrom"
+            >
+        </div>
+      </div>
+      <div class="col-12 mb-4" *ngIf="transactionType=='transfer'">
+
+        <div  class="form-group">
+          <label class="form-label"
+          for="accountNumber">
+         To Account Number
+         </label>
+          <input
+
+          type="text"
+          id="accountNumber"
+          name="accountNumber"
+          class="form-control"
+          formControlName="accNumTo"
+          >
+      </div>
+      <div *ngIf="getFormControls['accNumTo'].invalid&&getFormControls['accNumTo'].touched">
+        <div class="validation-alert"  *ngIf="getFormControls['accNumTo'].errors&&getFormControls['accNumTo'].errors['required']">
+            Please enter account Number
+        </div>
+        <div class="validation-alert"  *ngIf="getFormControls['accNumTo'].errors&&getFormControls['accNumTo'].errors['minlength']&&(!getFormControls['accNumTo'].errors['pattern'])">
+          account number should be of 14 digits
+
+      </div>
+
+    <div class="validation-alert"  *ngIf="getFormControls['accNumTo'].errors&&getFormControls['accNumTo'].errors['pattern']">
+     only numbers allowed
+  </div>
+
+    </div>
+
+
+    </div>
+<div class="mb-4">
+
+    <div  class="form-group">
+      <label class="form-label"
+      for="amount">
+     Amount
+     </label>
+      <input
+
+      type="text"
+      id="amount"
+      name="amount"
+      class="form-control"
+      formControlName="amount"
+      [class.is-invalid]="getFormControls['amount'].invalid && getFormControls['amount'].touched"
+      >
+      <div *ngIf="getFormControls['amount'].invalid&&getFormControls['amount'].touched">
+        <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['required']">
+            Please enter amount
+        </div>
+        <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['min']&&(!getFormControls['amount'].errors['pattern'])">
+          minimum amount needed is 100
+
+      </div>
+
+    <div class="validation-alert"  *ngIf="getFormControls['amount'].errors&&getFormControls['amount'].errors['pattern']">
+      only number allowed in amount and it not start with 0
+  </div>
+
+    </div>
+    </div>
+  </div>
+
+
+<div class="mb-4">
+
+  <div  class="form-group">
+    <label class="form-label"
+    for="amount">
+   Transaction Type
+   </label>
+   <select (change)="onChange($event)" #transactioType class="form-control">
+    <option value="">Select</option>
+    <option value="transfer">Transfer</option>
+    <option value="deposite">Deposite</option>
+    <option value="withdraw">Withdraw</option>
+   </select>
+</div>
+</div>
+
+
+
+  </form>
+  <div class="mb-4 w-100 d-flex justify-content-center gap-3">
+
+
+
+
+   <button
+      (click)="onCloseBtnClick()"
+     type="submit"
+     class="btn btn-primary btn-block  col-3"
+     >Cancel
+</button>
+
+<button *ngIf="transactionType==='transfer'"
+    [class.disabled]="depositeForm.invalid"
+      type="submit"
+      (click)="onSubmit()"
+      class="btn btn-primary btn-block col-3"
+      >
+      Transfer
+     </button>
+     <button *ngIf="transactionType==='deposite'"
+     [class.disabled]="depositeForm.invalid"
+       type="submit"
+       (click)="onSubmit()"
+       class="btn btn-primary btn-block col-3"
+       >
+       Deposite
+      </button>
+     <button *ngIf="transactionType==='withdraw'"
+     [class.disabled]="depositeForm.invalid"
+       type="submit"
+       (click)="onSubmit()"
+       class="btn btn-primary btn-block col-3"
+       >
+       Withdraw
+      </button>
+
+</div>
+</div>

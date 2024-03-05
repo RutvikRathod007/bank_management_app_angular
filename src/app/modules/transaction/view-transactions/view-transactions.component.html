@@ -1,0 +1,86 @@
+<div class="table-wrapper bg-dark text-white py-4">
+  <div class="loader" *ngIf="transactions.length === 0"></div>
+  <h2 class="text-center">Transaction Details</h2>
+  <div class="container-fuild" *ngIf="transactions.length !== 0">
+    <div>
+      <div class="col-lg-10 mx-auto">
+        <div class="card rounded shadow border-0">
+          <div class="card-body bg-dark rounded">
+            <div class="table-responsive">
+              <table
+                id="example"
+                style="width: 100%"
+                class="table table-dark table-bordered"
+              >
+                <thead>
+                  <tr class="text-center">
+                    <th>Acc Number</th>
+                    <th>Transaction Type</th>
+                    <th>Transaction Time</th>
+                    <th>Amount</th>
+                    <th>Summary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="text-center align-middle"
+                    *ngFor="
+                      let transaction of transactions
+                        | slice
+                          : (currentPage - 1) * pageSize
+                          : currentPage * pageSize;
+                      let i = index
+                    "
+                  >
+                    <td>{{ transaction.accNumber }}</td>
+                    <td>{{ transaction.tType }}</td>
+                    <td>{{ transaction.tTime }}</td>
+                    <td
+                      [class]="
+
+                        (transaction.summary.includes('sent')||transaction.tType=='withdraw') ? 'withdraw':'deposite'
+
+                      "
+                    >
+                     <span>{{transaction.tAmount}}</span>
+                    </td>
+                    <td>{{ transaction.summary }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage == 1">
+                    <a
+                      class="page-link"
+                      (click)="prevPage()"
+                      aria-label="Previous"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li
+                    class="page-item"
+                    *ngFor="let page of pages"
+                    [class.active]="currentPage == page"
+                  >
+                    <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                  </li>
+                  <li
+                    class="page-item"
+                    [class.disabled]="currentPage == totalPages"
+                  >
+                    <a class="page-link" (click)="nextPage()" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

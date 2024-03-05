@@ -1,0 +1,211 @@
+
+
+<!-- Modal -->
+<div class="update-modal">
+
+    <div class="modal-content">
+
+        <h1 class="text-center">Edit Customer Details</h1>
+
+
+        <form  enctype="multipart/form-data" [formGroup]="updateCustForm" (submit)="onSubmit()" >
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+
+          <div class="row mb-4">
+              <!-- input box for firstName -->
+              <div class="col">
+                <div  class="form-group">
+                  <label class="form-label"
+                  for="firstName">
+                  First name
+                 </label>
+                  <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  class="form-control"
+                  [class.is-invalid]="getFormControls['firstName'].invalid && getFormControls['firstName'].touched"
+                  formControlName="firstName">
+                  <div *ngIf="getFormControls['firstName'].invalid&&getFormControls['firstName'].touched">
+                      <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['required']">
+                          Please enter firstname
+                      </div>
+                      <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['minlength']&&(!getFormControls['firstName'].errors['pattern'])">
+                        first name is to short minimum 3 letters required
+
+                    </div>
+                    <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['maxlength']&&(!getFormControls['firstName'].errors['pattern'])">
+                      first name is to long maximum 20 letters allowed
+                  </div>
+                  <div class="validation-alert"  *ngIf="getFormControls['firstName'].errors&&getFormControls['firstName'].errors['pattern']">
+                    only alphabets are allowed
+                </div>
+              </div>
+              </div>
+            </div>
+          <!-- input box for lastName -->
+            <div class="col">
+              <div  class="form-group">
+                <label class="form-label"
+                for="lastName">
+                Last name
+               </label>
+                <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="form-control"
+                [class.is-invalid]="
+                getFormControls['lastName'].invalid && getFormControls['lastName'].touched"
+
+                formControlName="lastName">
+                <div *ngIf="getFormControls['lastName'].invalid&&getFormControls['lastName'].touched">
+                  <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['required']">
+                      Please enter lastname
+                  </div>
+                  <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['minlength']&&(!getFormControls['lastName'].errors['pattern'])">
+                    lastname is to short minimum 3 letters required
+
+                </div>
+                <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['maxlength']&&(!getFormControls['lastName'].errors['pattern'])">
+                  lastname is to long maximum 20 letters allowed
+              </div>
+              <div class="validation-alert"  *ngIf="getFormControls['lastName'].errors&&getFormControls['lastName'].errors['pattern']">
+                only alphabets are allowed
+            </div>
+              </div>
+            </div>
+          </div>
+          </div>
+<!-- 2 column grid layout with text inputs for the date of birth and city -->
+          <div class="row mb-4">
+
+              <div class="col">
+                <div  class="form-group">
+                  <label
+                  class="form-label"
+                  for="dob">
+                  DOB
+                </label>
+                  <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  [class.is-invalid]="getFormControls['dob'].invalid"
+                  class="form-control"
+                  formControlName="dob"
+                   />
+                   <div
+                   id="validationServerUsernameFeedback"
+                   class="invalid-feedback position-absolute">
+                    Please choose DOB
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div  class="form-group">
+                  <label
+                  class="form-label"
+                  for="city">
+                  City
+                 </label>
+                 <select
+                 [class.is-invalid]="getFormControls['city'].invalid && getFormControls['city'].touched"
+                 formControlName="city"  class="form-control form-select" name="city">
+                  <option value="">Select</option>
+                  <option value="Rajkot">Rajkot</option>
+                  <option value="Jasdan">Jasdan</option>
+                  <option value="Div">Div</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Jamnagar">Jamnagar</option>
+                  <option value="Botad">Botad</option>
+                  <option value="Delhi">Delhi</option>
+                 </select>
+                  <div *ngIf="getFormControls['city'].invalid&&getFormControls['city'].touched">
+                    <div class="validation-alert"  *ngIf="getFormControls['city'].errors&&getFormControls['city'].errors['required']">
+                        Please select city
+                    </div>
+                </div>
+                </div>
+              </div>
+
+            </div>
+
+
+<!-- 2 column grid layout with text inputs for the email and amount -->
+          <div class="row mb-4">
+
+            <div class="col">
+              <div class="form-group">
+                <label
+                class="form-label"
+                for="customerImage">
+                Customer Image
+               </label>
+                <input
+                #fileInput
+                 name="customerImage"
+                 type="file"
+                 id="customerImage"
+                 class="form-control"
+                 accept=".jpg,.png,.jpeg"
+                 formControlName="customerImage"
+                 (change)="onFileInput($event)" />
+
+              </div>
+            </div>
+                <div class="col">
+                  <div  class="form-group">
+                    <label
+                    class="form-label"
+                    for="phoneNumber">
+                    Phone Number
+                   </label>
+                    <input
+                    name="phoneNumber"
+                    type="text"
+                    id="phoneNumber"
+                    class="form-control"
+                    formControlName="mobileNumber"
+                    [class.is-invalid]="getFormControls['mobileNumber'].invalid && getFormControls['mobileNumber'].touched"
+
+                    />
+                    <div *ngIf="getFormControls['mobileNumber'].invalid&&getFormControls['mobileNumber'].touched">
+                      <div class="validation-alert"  *ngIf="getFormControls['mobileNumber'].errors&&getFormControls['mobileNumber'].errors['required']">
+                          Please enter mobileNumber
+                      </div>
+
+                  <div class="validation-alert"  *ngIf="getFormControls['mobileNumber'].errors&&getFormControls['mobileNumber'].errors['pattern']">
+                    invalid mobile number
+                </div>
+                  </div>
+                  </div>
+                </div>
+
+          </div>
+        </form>
+        <div class="row mb-4  d-flex justify-content-center gap-3">
+
+
+
+          <button
+          [class.disabled]="updateCustForm.invalid"
+            type="submit"
+            (click)="onSubmit()"
+            class="btn btn-primary btn-block col-2"
+            >Update
+           </button>
+
+
+         <button
+            (click)="onCloseBtnClick()"
+           type="submit"
+           class="btn btn-primary btn-block  col-2"
+           >Cancel
+</button>
+      </div>
+      </div>
+    </div>
+
+
